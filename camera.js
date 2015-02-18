@@ -10,8 +10,7 @@ pc.script.create("scrolling camera", function(context) {
 
     onMouseMove: function(event) {
       if (event.x < 10) {
-        console.log(this.entity.getPosition());
-//        this.entity.setPosition(this.entity.getPosition().x - 0.5, this.entity.getPosition().y);
+        this.entity.translateLocal(-0.5, 0, 0);
       }
     }
 
