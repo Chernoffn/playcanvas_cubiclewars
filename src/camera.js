@@ -1,5 +1,4 @@
 pc.script.create("scrolling camera", function(context) {
-
   var ScrollingCamera = function(entity) {
     this.entity = entity;
 
