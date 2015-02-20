@@ -6,11 +6,13 @@
   </head>
   <body>
     <div id="mocha"></div>
+    <script src="chai.js"></script>
     <script src="mocha.js"></script>
     <script>mocha.setup('bdd')</script>
     <script src='out/all.js'></script>
 
     <script>
+      mocha.globals(['theta', 'phi']);
       mocha.checkLeaks();
       mocha.run();
     </script>

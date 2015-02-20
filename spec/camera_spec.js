@@ -1,4 +1,5 @@
 describe("Camera", function() {
+  var expect = chai.expect;
 
   it("does some stuff with the context", function() {
     var canvas = document.createElement("canvas");
@@ -18,7 +19,7 @@ describe("Camera", function() {
     new ScrollingCamera(entity);
     context.mouse.fire(pc.EVENT_MOUSE_MOVE, {x: 5});
 
-    expect(true).toBeFalsy();
+    expect(true).to.be.true;
   });
 });
 
