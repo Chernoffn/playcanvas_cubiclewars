@@ -14,10 +14,10 @@ if (typeof(window.test) === "undefined") {
 
     return {
       canvas: canvas,
-    context: context,
-    getConstructor: function(name) {
-      return scripts[name](context);
-    }
+      context: context,
+      getConstructor: function(name) {
+        return scripts[name](context);
+      }
     };
   })();
 }

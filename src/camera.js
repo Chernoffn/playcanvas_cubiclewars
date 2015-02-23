@@ -8,9 +8,12 @@ pc.script.create("scrolling camera", function(context) {
   ScrollingCamera.prototype = {
 
     onMouseMove: function(event) {
-      console.log("Mouse move?");
-      if (event.x <= this.margin) {
-        this.entity.translateLocal(-0.5, 0, 0);
+      this.mousePosition = event;
+    },
+
+    update: function(dt) {
+      if (this.mousePosition.x <= this.margin) {
+        this.entity.translateLocal(-this.scrollSpeed, 0, 0);
       }
     }
   };
