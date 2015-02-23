@@ -1,14 +1,29 @@
 describe("Camera", function() {
-  var expect = chai.expect;
+  var ScrollingCamera = test.getConstructor("scrolling camera");
+  var entity, camera;
 
-  it("does some stuff with the context", function() {
-    var entity = new pc.Entity();
-    var ScrollingCamera = test.getConstructor("scrolling camera");
-
-    new ScrollingCamera(entity);
-    test.context.mouse.fire(pc.EVENT_MOUSE_MOVE, {x: 5});
-
-    expect(true).to.be.true;
+  beforeEach(function() {
+    entity = new pc.Entity();
+    camera = new ScrollingCamera(entity);
   });
+
+  it("doesn't move the entity before the mouse is on a margin", function() {
+    camera.margin = 10
+
+    entity.translateLocal(pc.Vec3.ZERO);
+    test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 10, y: 11});
+
+    expect(entity.position.x).toEqual(0);
+  });
+
+  it("moves the entity left when the mouse hits the left margin", function() {
+    camera.margin = 10
+
+    entity.translateLocal(pc.Vec3.ZERO);
+    test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 10, y: 11});
+
+    expect(entity.getLocalPosition().x).toEqual(-0.5);
+  });
+
 });
 

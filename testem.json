@@ -1,0 +1,10 @@
+{
+  "framework": "jasmine",
+  "src_files": [
+    "third-party/playcanvas-latest.js",
+    "spec/helper.js",
+    "src/**/*.js",
+    "spec/**/*.js"
+  ],
+  "port": 8080
+}
