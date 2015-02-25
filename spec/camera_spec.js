@@ -6,10 +6,11 @@ describe("Camera", function() {
     entity = new pc.Entity();
     camera = new ScrollingCamera(entity);
     camera.margin = 10;
+    camera.scrollSpeed = 2.2;
+    camera.initialize();
   });
 
   it("doesn't move the entity before the mouse is on a margin", function() {
-    camera.scrollSpeed = 0.2;
     entity.translateLocal(pc.Vec3.ZERO);
 
     test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 10, y: 11});
@@ -19,7 +20,6 @@ describe("Camera", function() {
   });
 
   it("moves the entity left when the mouse hits the left margin", function() {
-    camera.scrollSpeed = 0.2;
     entity.translateLocal(pc.Vec3.ZERO);
 
     test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 10, y: 11});
@@ -29,10 +29,9 @@ describe("Camera", function() {
   });
 
   it("keeps moving the entity left on each update", function() {
-    camera.scrollSpeed = 0.2;
     entity.translateLocal(pc.Vec3.ZERO);
 
-    test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 10, y: 11});
+    test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: camera.margin, y: 11});
     camera.update();
     camera.update();
 
@@ -40,11 +39,18 @@ describe("Camera", function() {
   });
 
   it ("can safely call update before any mouse movement", function() {
-    camera.scrollSpeed = 2.2;
     camera.update();
 
     expect(entity.getLocalPosition()).toEqual(pc.Vec3.ZERO);
   });
-
+/*
+ *
+ *  it ("can move to the right", function() {
+ *    test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: screenWidth - camera.margin, y: 11});
+ *    camera.update();
+ *
+ *    expect(entity.getLocalPosition().x).toBeCloseTo(camera.scrollSpeed);
+ *  });
+ */
 });
 
