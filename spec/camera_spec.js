@@ -56,7 +56,7 @@ describe("Camera", function() {
     test.app.mouse.fire(pc.EVENT_MOUSEMOVE, {x: camera.margin + 1, y: camera.margin});
     camera.update();
 
-    expect(entity.getLocalPosition().y).toBeCloseTo(-camera.scrollSpeed);
+    expect(entity.getLocalPosition().z).toBeCloseTo(camera.scrollSpeed);
   });
 
   it ("can move down when close to the bottom", function() {
@@ -64,7 +64,7 @@ describe("Camera", function() {
     test.app.mouse.fire(pc.EVENT_MOUSEMOVE, {x: camera.margin + 1, y: 900 - camera.margin});
     camera.update();
 
-    expect(entity.getLocalPosition().y).toBeCloseTo(camera.scrollSpeed);
+    expect(entity.getLocalPosition().z).toBeCloseTo(-camera.scrollSpeed);
   });
 });
 
