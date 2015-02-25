@@ -17,6 +17,12 @@ pc.script.create("scrolling_camera", function(app) {
         } else if (this.mousePosition.x >= (app.graphicsDevice.width - this.margin)) {
           this.entity.translateLocal(this.scrollSpeed, 0, 0);
         }
+
+        if (this.mousePosition.y <= this.margin) {
+          this.entity.translateLocal(0, -this.scrollSpeed, 0);
+        } else if (this.mousePosition.y>= (app.graphicsDevice.height - this.margin)) {
+          this.entity.translateLocal(0, this.scrollSpeed, 0);
+        }
       }
     },
 
