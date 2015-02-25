@@ -1,5 +1,5 @@
 describe("Camera", function() {
-  var ScrollingCamera = test.getConstructor("scrolling camera");
+  var ScrollingCamera = test.getConstructor("scrolling_camera");
   var entity, camera;
 
   beforeEach(function() {
@@ -13,7 +13,7 @@ describe("Camera", function() {
   it("doesn't move the entity before the mouse is on a margin", function() {
     entity.translateLocal(pc.Vec3.ZERO);
 
-    test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 10, y: 11});
+    test.app.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 10, y: 11});
     camera.update();
 
     expect(entity.position.x).toEqual(0);
@@ -22,7 +22,7 @@ describe("Camera", function() {
   it("moves the entity left when the mouse hits the left margin", function() {
     entity.translateLocal(pc.Vec3.ZERO);
 
-    test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 10, y: 11});
+    test.app.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 10, y: 11});
     camera.update();
 
     expect(entity.getLocalPosition().x).toBeCloseTo(-camera.scrollSpeed);
@@ -31,7 +31,7 @@ describe("Camera", function() {
   it("keeps moving the entity left on each update", function() {
     entity.translateLocal(pc.Vec3.ZERO);
 
-    test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: camera.margin, y: 11});
+    test.app.mouse.fire(pc.EVENT_MOUSEMOVE, {x: camera.margin, y: 11});
     camera.update();
     camera.update();
 
@@ -43,14 +43,14 @@ describe("Camera", function() {
 
     expect(entity.getLocalPosition()).toEqual(pc.Vec3.ZERO);
   });
-/*
- *
- *  it ("can move to the right", function() {
- *    test.context.mouse.fire(pc.EVENT_MOUSEMOVE, {x: screenWidth - camera.margin, y: 11});
- *    camera.update();
- *
- *    expect(entity.getLocalPosition().x).toBeCloseTo(camera.scrollSpeed);
- *  });
- */
+
+  it ("can move to the right when close to the edige", function() {
+    test.app.graphicsDevice = {width: 900};
+    test.app.mouse.fire(pc.EVENT_MOUSEMOVE, {x: 900 - camera.margin, y: 11});
+    camera.update();
+
+    expect(entity.getLocalPosition().x).toBeCloseTo(camera.scrollSpeed);
+  });
+
 });
 

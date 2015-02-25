@@ -2,10 +2,7 @@ if (typeof(window.test) === "undefined") {
   window.test = (function() {
     var canvas = document.createElement("canvas");
     var app = new pc.Application(canvas, {});
-    var mouse = new pc.Mouse(canvas);
-    var context = {
-      mouse: mouse
-    };
+    app.mouse = new pc.Mouse(canvas);
 
     var scripts = {};
     pc.script.on("created", function(componentName, initializer) {
@@ -14,9 +11,9 @@ if (typeof(window.test) === "undefined") {
 
     return {
       canvas: canvas,
-      context: context,
+      app: app,
       getConstructor: function(name) {
-        return scripts[name](context);
+        return scripts[name](app);
       }
     };
   })();
