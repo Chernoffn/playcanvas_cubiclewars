@@ -2,6 +2,7 @@ if (typeof(window.app) === "undefined") {
   window.app = (function() {
     var canvas = document.createElement("canvas");
     var app = new pc.Application(canvas, {});
+    app.root.script = {};
   
     var scripts = {};
     pc.script.on("created", function(componentName, initializer) {
